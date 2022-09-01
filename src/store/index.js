@@ -1,22 +1,19 @@
 import { createStore } from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
+import user from '@/store/modules/user'
+import cart from '@/store/modules/cart'
+import category from '@/store/modules/category'
 
 export default createStore({
-  state: {
-    username: 'zs'
-  },
-  getters: {
-    newName (state) {
-      return state.username + '!!!'
-    }
-  },
-  mutations: {
-    updateName (state) {
-      state.username = 'ls'
-    }
-  },
-  actions: {
-
-  },
   modules: {
-  }
+    user,
+    cart,
+    category
+  },
+  plugins: [createPersistedState({
+    // 本地存储的名字
+    key: 'xiaotuxian-store',
+    //  指定要存储的模块
+    paths: [user, cart, category]
+  })]
 })
